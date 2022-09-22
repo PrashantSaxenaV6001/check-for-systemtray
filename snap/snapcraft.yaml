@@ -1,0 +1,28 @@
+name: systemtray
+version: 1.1.1
+summary: systemtray Cool App
+description: systemtray Cool App that does everything!
+confinement: devmode
+base: core18
+grade: stable
+
+slots:
+    dbus-systemtray: # adjust accordingly to your app name
+        interface: dbus
+        bus: session
+        name: org.bar.systemtray # adjust accordingly to your app name and
+
+apps:
+    systemtray:
+        command: systemtray
+        extensions: [flutter-master] # Where "master" defines which Flutter channel to use for the build
+        plugs:
+            - network
+            - desktop
+        slots:
+            - dbus-systemtray
+parts:
+    systemtray:
+        source: .
+        plugin: flutter
+        flutter-target: example/lib/main.dart # The main entry-point file of the application
